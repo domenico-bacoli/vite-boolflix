@@ -16,8 +16,9 @@ export default {
 
 <template>
     <div class="movies-search">
-        <input v-model="store.userValueInput" type="text" placeholder="Inserisci un Titolo">
-        <button>CERCA</button>
+        <input v-model="store.userValueInput" type="text" placeholder="Inserisci un Titolo"
+            @keyup.enter="$emit('searchMovie')">
+        <button @click="$emit('searchMovie')">CERCA</button>
     </div>
 </template>
 
