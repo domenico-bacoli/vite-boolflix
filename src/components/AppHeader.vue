@@ -36,7 +36,7 @@ header {
         justify-content: center;
         flex-flow: row nowrap;
         gap: 50px;
-        margin: 40px 0;
+        margin: 20px 0;
 
         input,
         button {

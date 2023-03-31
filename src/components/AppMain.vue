@@ -39,12 +39,21 @@ main {
 
     #movies-container,
     #series-tv-container {
+        // display: flex;
+        // flex-flow: row wrap;
+        // height: 400px;
+        // gap: 20px;
+        // overflow: auto;
+        // margin-bottom: 30px;
+
+        //test
         display: flex;
-        flex-flow: row wrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 24px;
+        border-radius: 20px;
         gap: 20px;
-        height: 300px;
-        overflow: auto;
-        margin-bottom: 30px;
+
     }
 }
 </style>
