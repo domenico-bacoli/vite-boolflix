@@ -26,14 +26,32 @@ export default {
   },
 
   methods: {
-    movieSearch() {
-      let userApiCall = this.store.APIsearchMovies + this.store.userValueInput;
-      axios.get(userApiCall).then((res) => {
-        this.store.movies = res.data.results;
-        console.log(res);
-
+    search(getSearch, category) {
+      let userCall = getSearch + this.store.userValueInput;
+      axios.get(userCall).then((res) => {
+        category = res.data.results;
+        console.log(category);
       });
-    }
+    },
+
+    movieSearch() {
+      // let userMovieCall = this.store.APIsearchMovies + this.store.userValueInput;
+      // axios.get(userMovieCall).then((res) => {
+      //   this.store.movies = res.data.results;
+      // });
+      this.search(this.store.APIsearchMovies, this.store.movies);
+      this.search(this.store.APIsearchSeries, this.store.series);
+
+      // this.seriesTvSearch();
+    },
+
+    // seriesTvSearch() {
+    //   let userSeriesCall = this.store.APIsearchSeries + this.store.userValueInput;
+    //   axios.get(userSeriesCall).then((res) => {
+
+    //   this.store.series = res.data.results;
+    //   });
+    // }
   },
 }
 

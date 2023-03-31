@@ -1,6 +1,7 @@
 <script>
 import { store } from '../store.js';
 import MovieItem from './MovieItem.vue';
+import SeriesItem from './SeriesItem.vue';
 
 export default {
     data() {
@@ -11,26 +12,39 @@ export default {
 
     components: {
         MovieItem,
+        SeriesItem
     }
 }
 </script>
 
 <template>
-    <main>
-        <div id="movies-container" class="container-centered">
+    <main class="container-centered">
+        <h2>FILM</h2>
+        <div id="movies-container">
             <MovieItem v-for="movie in store.movies" :movie="movie"></MovieItem>
+        </div>
+
+        <h2>SERIE TV</h2>
+        <div id="series-tv-container">
+            <SeriesItem v-for="series in store.series" :series="series"></SeriesItem>
         </div>
     </main>
 </template>
 
 <style lang="scss" scoped>
 main {
+    h2 {
+        margin-bottom: 20px;
+    }
 
-
-    #movies-container {
+    #movies-container,
+    #series-tv-container {
         display: flex;
         flex-flow: row wrap;
         gap: 20px;
+        height: 300px;
+        overflow: auto;
+        margin-bottom: 30px;
     }
 }
 </style>
