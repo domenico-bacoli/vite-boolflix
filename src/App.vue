@@ -27,7 +27,7 @@ export default {
 
   methods: {
     movieSearch() {
-      let userApiCall = this.store.APIsearchQuery + this.store.userValueInput;
+      let userApiCall = this.store.APIsearchMovies + this.store.userValueInput;
       axios.get(userApiCall).then((res) => {
         this.store.movies = res.data.results;
         console.log(res);
