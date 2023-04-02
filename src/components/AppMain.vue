@@ -33,22 +33,15 @@ export default {
 
 <style lang="scss" scoped>
 main {
-    padding-top: 60px;
+    padding-top: 100px;
 
     h2 {
+        font-size: 30px;
         margin-bottom: 20px;
     }
 
     #movies-container,
     #series-tv-container {
-        // display: flex;
-        // flex-flow: row wrap;
-        // height: 400px;
-        // gap: 20px;
-        // overflow: auto;
-        // margin-bottom: 30px;
-
-        //test
         position: relative;
         display: flex;
         overflow-x: scroll;

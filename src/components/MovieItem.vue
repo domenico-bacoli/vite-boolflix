@@ -47,7 +47,8 @@ export default {
 <template>
     <div class="movie">
         <div class="movie-image">
-            <img :src="` ${this.store.imagePath + movie.poster_path} `" alt="">
+            <img v-if="movie.poster_path == null" src="/img/ant-non-disp.jpg" alt="anteprima non disponibile">
+            <img v-else :src="` ${this.store.imagePath + movie.poster_path} `" alt="">
         </div>
         <div class="movie-details">
             <div class="title"><span>Titolo:</span>{{ movie.title }}</div>
@@ -87,7 +88,7 @@ export default {
 
     &:hover .movie-image img {
         transition: opacity 0.6s ease-in-out;
-        opacity: 0.15;
+        opacity: 0.10;
     }
 
     &:first-child {
@@ -113,6 +114,12 @@ export default {
         width: 80%;
         transition: all 0.7s;
         padding: 10px;
+        max-height: 100%;
+        overflow: auto;
+
+        .title {
+            text-transform: uppercase;
+        }
     }
 
     &:hover .movie-details {

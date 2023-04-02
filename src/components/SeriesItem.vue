@@ -35,6 +35,12 @@ export default {
             } return language;
 
         },
+
+        voteWithStars(vote) {
+            let num = vote;
+            vote = Math.round(num);
+            return vote;
+        }
     },
 }
 </script>
@@ -49,7 +55,10 @@ export default {
             <div class="original-title"><span>Titolo Originale:</span> {{ series.original_name }}</div>
             <div class="languages"><span>Lingua:</span><span :class="`fi fi-${flagIcon()} fis`"></span>
                 {{ series.original_language }} </div>
-            <div class="vote"><span>Voto Medio:</span> {{ series.vote_average }}</div>
+            <div class="vote"><span>Voto Medio:</span><i v-for="star in store.starsVote"
+                    :class="star < voteWithStars(series.vote_average) ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            </div>
+            <div class="overview"><span>Overview:</span> {{ series.overview }}</div>
         </div>
 
     </div>
@@ -62,14 +71,25 @@ export default {
     // background-color: white;
     // border-radius: 20px;
 
-    flex: 0 0 20%;
+    flex: 0 0 23%;
     // padding: 10px;
     border-radius: 10px;
     scroll-snap-align: start;
     cursor: pointer;
-    margin-top: 34px;
-    margin-bottom: 34px;
-    margin-left: -20px;
+    margin: 26px 0;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.8s;
+    height: 100%;
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    &:hover .series-image img {
+        transition: opacity 0.6s ease-in-out;
+        opacity: 0.10;
+    }
 
     &:first-child {
         margin-left: 10px;
@@ -79,21 +99,38 @@ export default {
         width: 100%;
         object-fit: cover;
         border-radius: 20px;
-        transition: all 0.7s;
-
-        &:hover {
-            transform: scale(1.2);
-        }
     }
 
     .series-details {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.7em;
+        width: 80%;
+        transition: all 0.7s;
         padding: 10px;
+        max-height: 100%;
+        overflow: auto;
+    }
 
-        span {
-            font-weight: bold;
-            text-transform: uppercase;
-            padding-right: 6px;
-        }
+    &:hover .series-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    span {
+        font-size: 1.1em;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding-right: 6px;
+        color: rgb(220, 31, 43);
+    }
+
+    .fa-solid.fa-star {
+        color: gold;
     }
 }
 </style>
