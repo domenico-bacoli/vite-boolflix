@@ -12,8 +12,8 @@ export default {
 
     components: {
         MovieItem,
-        SeriesItem
-    }
+        SeriesItem,
+    },
 }
 </script>
 
@@ -33,6 +33,8 @@ export default {
 
 <style lang="scss" scoped>
 main {
+    padding-top: 60px;
+
     h2 {
         margin-bottom: 20px;
     }
@@ -47,13 +49,12 @@ main {
         // margin-bottom: 30px;
 
         //test
+        position: relative;
         display: flex;
-        overflow-x: auto;
+        overflow-x: scroll;
         scroll-snap-type: x mandatory;
         scroll-padding: 24px;
         border-radius: 20px;
-        gap: 20px;
-
     }
 }
 </style>

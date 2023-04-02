@@ -34,6 +34,12 @@ export default {
 
             } return language;
         },
+
+        voteWithStars(vote) {
+            let num = vote;
+            vote = Math.round(num);
+            return vote;
+        }
     },
 }
 </script>
@@ -48,7 +54,11 @@ export default {
             <div class="original-title"><span>Titolo Originale:</span> {{ movie.original_title }}</div>
             <div class="languages"><span>Lingua:</span><span :class="`fi fi-${flagIcon()} fis`"></span>
                 {{ movie.original_language }}</div>
-            <div class="vote"><span>Voto Medio:</span> {{ movie.vote_average }}</div>
+            <div class="vote"><span>Voto Medio:</span><i v-for="star in store.starsVote"
+                    :class="star < voteWithStars(movie.vote_average) ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            </div>
+
+            <div class="overview"><span>Overview:</span> {{ movie.overview }}</div>
         </div>
     </div>
 </template>
@@ -61,29 +71,66 @@ export default {
     // border-radius: 20px;
 
     //test
-    flex: 0 0 25%;
+    position: relative;
+    flex: 0 0 23%;
     // padding: 10px;
     border-radius: 10px;
     scroll-snap-align: start;
+    margin: 26px 0;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.8s;
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    &:hover .movie-image img {
+        transition: opacity 0.6s ease-in-out;
+        opacity: 0.15;
+    }
+
+    &:first-child {
+        margin-left: 10px;
+    }
 
     .movie-image {
 
         img {
             width: 100%;
-            height: 100%;
             object-fit: cover;
             border-radius: 20px;
         }
     }
 
     .movie-details {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.7em;
+        width: 80%;
+        transition: all 0.7s;
         padding: 10px;
     }
 
+    &:hover .movie-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
     span {
+        font-size: 1.1em;
         font-weight: bold;
         text-transform: uppercase;
         padding-right: 6px;
+        color: rgb(220, 31, 43);
+    }
+
+    .fa-solid.fa-star {
+        color: gold;
     }
 }
 </style>

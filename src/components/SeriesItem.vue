@@ -57,17 +57,37 @@ export default {
 
 <style lang="scss" scoped>
 .series {
-    width: calc(100% / 3 - (20px / 3 * 2));
+    // width: calc(100% / 3 - (20px / 3 * 2));
+    // color: black;
+    // background-color: white;
+    // border-radius: 20px;
 
-    color: black;
-    background-color: white;
+    flex: 0 0 20%;
+    // padding: 10px;
+    border-radius: 10px;
+    scroll-snap-align: start;
+    cursor: pointer;
+    margin-top: 34px;
+    margin-bottom: 34px;
+    margin-left: -20px;
+
+    &:first-child {
+        margin-left: 10px;
+    }
 
     img {
         width: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        transition: all 0.7s;
+
+        &:hover {
+            transform: scale(1.2);
+        }
     }
 
     .series-details {
-        padding: 20px;
+        padding: 10px;
 
         span {
             font-weight: bold;

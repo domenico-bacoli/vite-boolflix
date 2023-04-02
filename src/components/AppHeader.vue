@@ -19,31 +19,99 @@ export default {
 
 <template>
     <header>
-        <div class="movies-search">
-            <input v-model="store.userValueInput" type="text" placeholder="Inserisci un Titolo"
-                @keyup.enter="$emit('searchMovie')">
-            <button @click="$emit('searchMovie')">CERCA</button>
-        </div>
+        <nav>
+            <div class="logo">
+                <img src="/img/netflix-logo.svg" alt="logo netflix">
+                <div class="nav-link">
+                    <ul>
+                        <li>Home</li>
+                        <li>Film</li>
+                        <li>Serie TV</li>
+                        <li>La mia Lista</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="movies-search">
+                <input v-model="store.userValueInput" type="text" placeholder="Inserisci un Titolo"
+                    @keyup.enter="$emit('searchMovie')">
+                <div class="button-search">
+                    <button @click="$emit('searchMovie')">CERCA</button>
+                </div>
+            </div>
+
+        </nav>
+
     </header>
 </template>
 
 <style lang="scss" scoped>
 header {
-    margin-bottom: 40px;
 
-    .movies-search {
+    nav {
+        position: fixed;
         display: flex;
-        justify-content: center;
-        flex-flow: row nowrap;
-        gap: 50px;
-        margin: 20px 0;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        background-color: rgb(11, 11, 11);
+        width: 100%;
+        z-index: 2;
 
-        input,
-        button {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            height: 100%;
+            padding: 22px 60px;
+
+            img {
+                height: 100%;
+            }
+
+            .nav-link {
+
+                ul {
+                    display: flex;
+                    align-items: center;
+                    gap: 30px;
+
+                    li {
+                        font-size: 0.9em;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: gray;
+                        }
+                    }
+                }
+            }
+
         }
+
+        .movies-search {
+            display: flex;
+            gap: 20px;
+
+            input {
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: none;
+            }
+        }
+
+        .button-search {
+            padding-right: 60px;
+
+            button {
+                padding: 10px 20px;
+                border-radius: 10px;
+                border: none;
+            }
+        }
+
     }
+
+
 }
 </style>
