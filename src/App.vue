@@ -15,11 +15,9 @@ export default {
   created() {
     //Richiesta API che avverrà al caricamento della pagina
     axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=039ed4dd946ea3a9b91c880f13f9942f').then((res) => {
-      console.log(res);
       this.store.movies = res.data.results;
     });
     axios.get('https://api.themoviedb.org/3/trending/tv/week?api_key=039ed4dd946ea3a9b91c880f13f9942f').then((res) => {
-      console.log(res);
       this.store.series = res.data.results;
     });
   },
@@ -31,8 +29,13 @@ export default {
 
   methods: {
     search() {
-      this.movieSearch();
-      this.seriesSearch();
+      if (this.store.userValueInput == '') {
+
+      } else {
+        this.movieSearch();
+        this.seriesSearch();
+      }
+
     },
 
     movieSearch() {
@@ -40,6 +43,7 @@ export default {
       axios.get(userMovieCall).then((res) => {
         this.store.movies = res.data.results;
       })
+
     },
 
     seriesSearch() {
