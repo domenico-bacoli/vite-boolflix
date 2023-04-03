@@ -39,7 +39,7 @@ export default {
             let num = vote;
             vote = Math.round(num);
             return vote;
-        }
+        },
     },
 }
 </script>
@@ -50,6 +50,8 @@ export default {
             <img v-if="movie.poster_path == null" src="/img/ant-non-disp.jpg" alt="anteprima non disponibile">
             <img v-else :src="` ${this.store.imagePath + movie.poster_path} `" alt="">
         </div>
+
+
         <div class="movie-details">
             <div class="title"><span>Titolo:</span>{{ movie.title }}</div>
             <div class="original-title"><span>Titolo Originale:</span> {{ movie.original_title }}</div>
@@ -81,6 +83,12 @@ export default {
     padding: 10px 10px;
     cursor: pointer;
     transition: all 0.8s;
+
+    &.active {
+        position: sticky;
+        z-index: 2;
+        border: 3px solid white;
+    }
 
     &:hover {
         transform: scale(1.15);
