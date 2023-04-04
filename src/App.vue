@@ -50,7 +50,6 @@ export default {
       let userSeriesCall = this.store.APIsearchSeries + this.store.userValueInput;
       axios.get(userSeriesCall).then((res) => {
         this.store.series = res.data.results;
-        console.log(res);
       });
     }
   },

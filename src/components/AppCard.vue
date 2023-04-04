@@ -1,7 +1,5 @@
 <script>
 import { store } from '../store.js';
-import "/node_modules/flag-icons/css/flag-icons.min.css";
-
 export default {
     data() {
         return {
@@ -10,12 +8,13 @@ export default {
     },
 
     props: {
-        movie: Object,
+        searchItem: Object,
+        itemType: String,
     },
 
     computed: {
         languageFix() {
-            switch (this.movie.original_language) {
+            switch (this.searchItem.original_language) {
                 case "en":
                     return "gb";
 
@@ -29,70 +28,67 @@ export default {
                     return "kr";
 
                 default:
-                    return this.movie.original_language;
+                    return this.searchItem.original_language;
             }
         }
     },
 
     methods: {
-
         voteWithStars() {
-            return Math.ceil(this.movie.vote_average / 2);
+            return Math.ceil(this.searchItem.vote_average / 2);
         },
     },
 }
+
 </script>
 
 <template>
-    <div class="movie">
-        <div class="movie-image">
-            <img v-if="movie.poster_path == null" src="/img/ant-non-disp.jpg" alt="anteprima non disponibile">
-            <img v-else :src="` ${this.store.imagePath + movie.poster_path} `" :alt="movie.title">
+    <div class="card">
+        <div class="card-image">
+            <img v-if="searchItem.poster_path == null" src="/img/ant-non-disp.jpg" alt="anteprima non disponibile">
+            <img v-else :src="` ${this.store.imagePath + searchItem.poster_path} `" :alt="searchItem.title">
         </div>
 
-        <div class="movie-details">
-            <div class="title"><span>Titolo:</span>{{ movie.title }}</div>
-            <div class="original-title"><span>Titolo Originale:</span> {{ movie.original_title }}</div>
+        <div class="card-details">
+            <!-- Controllo tramite prop: itemType la differenziazione tra film e serieTv poichè 
+                                                                                                                                                                                                                                                                                                                                                                                                                                        per accedere al title dobbiamo usare .title per i film e .name per le serieTv -->
+            <div v-if="itemType == 'movie'" class="title"><span>Titolo:</span>{{ searchItem.title }}</div>
+            <div v-else class="title"><span>Titolo:</span>{{ searchItem.name }}</div>
+
+            <div v-if="itemType == 'movie'" class="original-title"><span>Titolo Originale:</span> {{
+                searchItem.original_title }}</div>
+            <div v-else class="original-title"><span>Titolo Originale:</span> {{ searchItem.original_name }}</div>
+
             <div class="languages"><span>Lingua:</span><span :class="`fi fi-${languageFix} fis`"></span></div>
             <div class="vote"><span>Voto Medio:</span><i v-for="number in voteWithStars()" class="fa-solid fa-star"></i><i
                     v-for="number in 5 - voteWithStars()" class="fa-regular fa-star"></i>
             </div>
-            <div class="overview"><span>Overview:</span> {{ movie.overview }}</div>
+            <div class="overview"><span>Overview:</span> {{ searchItem.overview }}</div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.movie {
-    position: relative;
-    flex: 0 0 23%;
-    border-radius: 10px;
-    scroll-snap-align: start;
-    margin: 26px 0;
-    padding: 10px 10px;
+.card {
     cursor: pointer;
     transition: all 0.8s;
+    border-radius: 20px;
 
-    &.active {
-        position: sticky;
-        z-index: 2;
-        border: 3px solid white;
-    }
+    padding: 30px 10px;
+
 
     &:hover {
         transform: scale(1.15);
+        border-radius: 20px;
     }
 
-    &:hover .movie-image img {
+    &:hover .card-image img {
         transition: opacity 0.6s ease-in-out;
         opacity: 0.10;
+        border-radius: 20px;
     }
 
-    &:first-child {
-        margin-left: 10px;
-    }
-
-    .movie-image {
+    .card-image {
 
         img {
             width: 100%;
@@ -101,7 +97,7 @@ export default {
         }
     }
 
-    .movie-details {
+    .card-details {
         display: none;
         position: absolute;
         top: 50%;
@@ -119,10 +115,10 @@ export default {
         }
     }
 
-    &:hover .movie-details {
+    &:hover .card-details {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
     }
 
     span {
@@ -136,5 +132,6 @@ export default {
     .fa-solid.fa-star {
         color: gold;
     }
+
 }
 </style>

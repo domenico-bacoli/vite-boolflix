@@ -12,8 +12,6 @@ export const store = reactive({
 
     series: [],
 
-    starsVote: [0, 1, 2, 3, 4],
-
     imagePath: 'https://image.tmdb.org/t/p/w342',
 
     userValueInput: "",

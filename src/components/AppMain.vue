@@ -1,58 +1,75 @@
 <script>
 
 import { store } from '../store.js';
-import MovieItem from './MovieItem.vue';
-import SeriesItem from './SeriesItem.vue';
+import AppCard from './AppCard.vue';
 
-export default {
-    data() {
-        return {
-            store,
-        };
-    },
+import { defineComponent } from 'vue'
+import { Carousel, Navigation, Slide } from 'vue3-carousel'
 
+import 'vue3-carousel/dist/carousel.css'
+
+export default defineComponent({
+    name: 'Breakpoints',
     components: {
-        MovieItem,
-        SeriesItem,
+        AppCard,
+        Carousel,
+        Slide,
+        Navigation,
     },
-
-    methods: {
-
-        // next() {
-        //     if (this.activeIndex < this.store.movies.length - 1) {
-        //         this.activeIndex++;
-        //         console.log("cliccato");
-        //     } else {
-        //         this.activeIndex = 0;
-        //     }
-        // },
-
-        // previous() {
-        //     if (this.activeIndex == 0) {
-        //         this.activeIndex = this.store.movies.length - 1;
-        //     } else {
-        //         this.activeIndex--;
-        //         console.log("cliccato");
-        //     }
-        // },
-    },
-}
+    data: () => ({
+        // carousel settings
+        settings: {
+            itemsToShow: 1,
+            snapAlign: 'center',
+        },
+        // breakpoints are mobile first
+        // any settings not specified will fallback to the carousel settings
+        breakpoints: {
+            // 700px and up
+            700: {
+                itemsToShow: 3.5,
+                snapAlign: 'center',
+            },
+            // 1024 and up
+            1024: {
+                itemsToShow: 5,
+                snapAlign: 'start',
+            },
+        },
+        store,
+    }),
+})
+// FINE CODICE DI PROVE PER CAROUSEL
 </script>
 
 <template>
     <main class="container-centered">
         <h2>FILM</h2>
-        <!-- <div class="arrow-left" @click="previous()"><i class="fa-solid fa-chevron-left"></i></div>
-            <div class="arrow-right" @click="next()"><i class="fa-solid fa-chevron-right"></i></div> -->
+        <Carousel :settings="settings" :breakpoints="breakpoints">
+            <Slide v-for="movie in store.movies" :key="movie">
+                <div class="carousel__item">
+                    <AppCard :searchItem="movie" :itemType="'movie'"></AppCard>
+                </div>
 
-        <div id="movies-container">
-            <MovieItem v-for="movie in store.movies" :movie="movie"></MovieItem>
-        </div>
+            </Slide>
+
+            <template #addons>
+                <Navigation />
+            </template>
+        </Carousel>
 
         <h2>SERIE TV</h2>
-        <div id="series-tv-container">
-            <SeriesItem v-for="series in store.series" :series="series"></SeriesItem>
-        </div>
+        <Carousel :settings="settings" :breakpoints="breakpoints">
+            <Slide v-for="series in store.series" :key="series">
+                <div class="carousel__item">
+                    <AppCard :searchItem="series" :itemType="'series'"></AppCard>
+                </div>
+            </Slide>
+
+            <template #addons>
+                <Navigation />
+            </template>
+        </Carousel>
     </main>
 </template>
 
@@ -65,15 +82,8 @@ main {
         margin-bottom: 20px;
     }
 
-    #movies-container,
-    #series-tv-container {
-        position: relative;
-        display: flex;
-        overflow-x: scroll;
-        scroll-snap-type: x mandatory;
-        scroll-padding: 24px;
-        border-radius: 20px;
-
+    .carousel {
+        text-align: start;
     }
 }
 </style>

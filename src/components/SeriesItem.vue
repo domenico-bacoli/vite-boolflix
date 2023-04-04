@@ -36,13 +36,12 @@ export default {
 
     methods: {
 
-        voteWithStars(vote) {
-            let num = vote;
-            vote = Math.round(num);
-            return vote;
+        voteWithStars() {
+            return Math.ceil(this.series.vote_average / 2);
         }
     },
 }
+
 </script>
 
 <template>
@@ -55,12 +54,11 @@ export default {
             <div class="title"><span>Titolo:</span>{{ series.name }}</div>
             <div class="original-title"><span>Titolo Originale:</span> {{ series.original_name }}</div>
             <div class="languages"><span>Lingua:</span><span :class="`fi fi-${languageFix} fis`"></span></div>
-            <div class="vote"><span>Voto Medio:</span><i v-for="star in store.starsVote"
-                    :class="star < voteWithStars(series.vote_average) ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i>
+            <div class="vote"><span>Voto Medio:</span><i v-for="number in voteWithStars()" class="fa-solid fa-star"></i><i
+                    v-for="number in 5 - voteWithStars()" class="fa-regular fa-star"></i>
             </div>
             <div class="overview"><span>Overview:</span> {{ series.overview }}</div>
         </div>
-
     </div>
 </template>
 
@@ -102,11 +100,15 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 0.7em;
-        width: 80%;
+        width: 70%;
+        height: 70%;
         transition: all 0.7s;
-        padding: 10px;
-        max-height: 100%;
         overflow: auto;
+
+        .title {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
     }
 
     &:hover .series-details {
