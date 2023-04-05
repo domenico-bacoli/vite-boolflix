@@ -12,7 +12,7 @@ export default {
 
     },
 
-    emits: ['searchMovie'],
+    emits: ['searchMovie', 'homeReturn', 'onlyFilm', 'onlySerieTv'],
 
 }
 </script>
@@ -24,9 +24,9 @@ export default {
                 <img src="/img/netflix-logo.svg" alt="logo netflix">
                 <div class="nav-link">
                     <ul>
-                        <li>Home</li>
-                        <li>Film</li>
-                        <li>Serie TV</li>
+                        <li @click="$emit('homeReturn')">Home</li>
+                        <li @click="$emit('onlyFilm')">Film</li>
+                        <li @click="$emit('onlySerieTv')">Serie TV</li>
                         <li>La mia Lista</li>
                     </ul>
                 </div>

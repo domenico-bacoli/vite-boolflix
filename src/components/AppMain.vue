@@ -3,8 +3,8 @@
 import { store } from '../store.js';
 import AppCard from './AppCard.vue';
 
-import { defineComponent } from 'vue'
-import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import { defineComponent } from 'vue';
+import { Carousel, Navigation, Slide } from 'vue3-carousel';
 
 import 'vue3-carousel/dist/carousel.css'
 
@@ -36,51 +36,58 @@ export default defineComponent({
         store,
     }),
 })
-// FINE CODICE DI PROVE PER CAROUSEL
+
 </script>
 
 <template>
     <main class="container-centered">
-        <h2>FILM</h2>
-        <Carousel :settings="settings" :breakpoints="breakpoints">
-            <Slide v-for="movie in store.movies" :key="movie">
-                <div class="carousel__item">
-                    <AppCard :searchItem="movie" :itemType="'movie'"></AppCard>
-                </div>
+        <section id="movie" v-show="this.store.isFilmClicked == true">
+            <h2>FILM</h2>
+            <Carousel :settings="settings" :breakpoints="breakpoints">
+                <Slide v-for="movie in store.movies" :key="movie">
+                    <div class="carousel__item">
+                        <AppCard :searchItem="movie" :itemType="'movie'">
+                        </AppCard>
+                    </div>
 
-            </Slide>
+                </Slide>
 
-            <template #addons>
-                <Navigation>
-                    <template #next>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </template>
-                    <template #prev>
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </template>
-                </Navigation>
-            </template>
-        </Carousel>
+                <template #addons>
+                    <Navigation>
+                        <template #next>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </template>
+                        <template #prev>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </template>
+                    </Navigation>
+                </template>
+            </Carousel>
+        </section>
 
-        <h2>SERIE TV</h2>
-        <Carousel :settings="settings" :breakpoints="breakpoints">
-            <Slide v-for="series in store.series" :key="series">
-                <div class="carousel__item">
-                    <AppCard :searchItem="series" :itemType="'series'"></AppCard>
-                </div>
-            </Slide>
+        <section id="tv-series" v-show="this.store.isSerieTvClicked == true">
+            <h2>SERIE TV</h2>
+            <Carousel :settings="settings" :breakpoints="breakpoints">
+                <Slide v-for="series in store.series" :key="series">
+                    <div class="carousel__item">
+                        <AppCard :searchItem="series" :itemType="'series'">
+                        </AppCard>
+                    </div>
+                </Slide>
 
-            <template #addons>
-                <Navigation>
-                    <template #next>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </template>
-                    <template #prev>
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </template>
-                </Navigation>
-            </template>
-        </Carousel>
+                <template #addons>
+                    <Navigation>
+                        <template #next>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </template>
+                        <template #prev>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </template>
+                    </Navigation>
+                </template>
+            </Carousel>
+        </section>
+
     </main>
 </template>
 
