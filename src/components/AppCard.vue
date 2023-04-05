@@ -51,7 +51,7 @@ export default {
 
         <div class="card-details">
             <!-- Controllo tramite prop: itemType la differenziazione tra film e serieTv poichè 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    per accedere al title dobbiamo usare .title per i film e .name per le serieTv -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            per accedere al title dobbiamo usare .title per i film e .name per le serieTv -->
             <div v-if="itemType == 'movie'" class="title"><span>Titolo:</span>{{ searchItem.title }}</div>
             <div v-else class="title"><span>Titolo:</span>{{ searchItem.name }}</div>
 
@@ -132,6 +132,5 @@ export default {
     .fa-solid.fa-star {
         color: gold;
     }
-
 }
 </style>
