@@ -3,9 +3,9 @@ import { store } from './store';
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 
-import axios from "axios";
+
 import { createDOMCompilerError } from '@vue/compiler-dom';
-import AppCard from './components/AppCard.vue';
+import axios from "axios";
 
 export default {
   data() {
@@ -18,9 +18,11 @@ export default {
     //Richiesta API che avverrà al caricamento della pagina
     axios.get('https://api.themoviedb.org/3/trending/movie/week?api_key=039ed4dd946ea3a9b91c880f13f9942f').then((res) => {
       this.store.movies = res.data.results;
+      console.log(res);
     });
     axios.get('https://api.themoviedb.org/3/trending/tv/week?api_key=039ed4dd946ea3a9b91c880f13f9942f').then((res) => {
       this.store.series = res.data.results;
+      console.log(res);
     });
   },
 
@@ -62,8 +64,8 @@ export default {
       axios.get('https://api.themoviedb.org/3/trending/tv/week?api_key=039ed4dd946ea3a9b91c880f13f9942f').then((res) => {
         this.store.series = res.data.results;
       });
-      this.store.isSerieTvClicked = true;
-      this.store.isFilmClicked = true;
+      this.store.isSerieTvActive = true;
+      this.store.isFilmActive = true;
     },
 
     navFilm() {
@@ -72,8 +74,8 @@ export default {
         this.store.movies = res.data.results;
       });
       this.store.series = '';
-      this.store.isSerieTvClicked = false;
-      this.store.isFilmClicked = true;
+      this.store.isSerieTvActive = false;
+      this.store.isFilmActive = true;
     },
 
     navSerieTv() {
@@ -82,8 +84,8 @@ export default {
         this.store.series = res.data.results;
       });
       this.store.movies = '';
-      this.store.isFilmClicked = false;
-      this.store.isSerieTvClicked = true;
+      this.store.isFilmActive = false;
+      this.store.isSerieTvActive = true;
     },
   },
 

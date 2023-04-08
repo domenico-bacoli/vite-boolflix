@@ -37,6 +37,7 @@ export default {
         voteWithStars() {
             return Math.ceil(this.searchItem.vote_average / 2);
         },
+
     },
 }
 
@@ -51,9 +52,9 @@ export default {
 
         <div class="card-details">
             <!-- Controllo tramite prop: itemType la differenziazione tra film e serieTv poichè 
-                                                    per accedere al title dobbiamo usare .title per i film e .name per le serieTv -->
-            <div v-if="itemType == 'movie'" class="title"><span>Titolo:</span>{{ searchItem.title }}</div>
-            <div v-else class="title"><span>Titolo:</span>{{ searchItem.name }}</div>
+                    per accedere al title dobbiamo usare .title per i film e .name per le serieTv -->
+            <div v-if="itemType == 'movie'" class="title"><span>Titolo:</span> {{ searchItem.title }}</div>
+            <div v-else class="title"><span>Titolo:</span> {{ searchItem.name }}</div>
 
             <div v-if="itemType == 'movie'" class="original-title"><span>Titolo Originale:</span> {{
                 searchItem.original_title }}</div>
@@ -132,9 +133,5 @@ export default {
     .fa-solid.fa-star {
         color: gold;
     }
-}
-
-.active {
-    display: none;
 }
 </style>

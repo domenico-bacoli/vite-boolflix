@@ -16,8 +16,8 @@ export const store = reactive({
 
     userValueInput: "",
 
-    isFilmClicked: true,
+    isFilmActive: true,
 
-    isSerieTvClicked: true,
+    isSerieTvActive: true,
 
 });
